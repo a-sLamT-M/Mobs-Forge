@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "lconquer:block/ruby_block" }
+  }
+}

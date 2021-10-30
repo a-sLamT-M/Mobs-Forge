@@ -15,6 +15,8 @@ import net.minecraftforge.fmlserverevents.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lt.conquer.registy.ModItems;
+import org.lt.conquer.registy.register.ItemsManager;
 
 import java.util.stream.Collectors;
 
@@ -27,15 +29,14 @@ public class Conquer
 
     public Conquer()
     {
-        // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
-        // Register ourselves for server and other game events we are interested in
+        ItemsManager.getInstance().register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("[HQ] 插件已上线");
+        LOGGER.info("[HQ] Conquer has been loaded.");
     }
 }
