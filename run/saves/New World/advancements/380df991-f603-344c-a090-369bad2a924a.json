@@ -11,6 +11,57 @@
     },
     "done": true
   },
+  "minecraft:recipes/food/cake": {
+    "criteria": {
+      "has_egg": "2021-10-30 21:32:22 +0800"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_salmon_from_smoking": {
+    "criteria": {
+      "has_salmon": "2021-10-30 21:37:05 +0800"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/balanced_diet": {
+    "criteria": {
+      "enchanted_golden_apple": "2021-11-01 06:23:55 +0800"
+    },
+    "done": false
+  },
+  "minecraft:recipes/misc/mojang_banner_pattern": {
+    "criteria": {
+      "has_enchanted_golden_apple": "2021-11-01 06:21:20 +0800"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_chicken_from_campfire_cooking": {
+    "criteria": {
+      "has_chicken": "2021-10-30 21:39:17 +0800"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:forest": "2021-10-30 21:32:12 +0800",
+      "minecraft:taiga": "2021-10-30 19:37:35 +0800",
+      "minecraft:river": "2021-10-30 21:31:11 +0800",
+      "minecraft:plains": "2021-10-30 18:20:08 +0800"
+    },
+    "done": false
+  },
+  "minecraft:recipes/misc/charcoal": {
+    "criteria": {
+      "has_log": "2021-11-01 06:29:49 +0800"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/spruce_planks": {
+    "criteria": {
+      "has_logs": "2021-11-01 06:29:49 +0800"
+    },
+    "done": true
+  },
   "minecraft:husbandry/root": {
     "criteria": {
       "consumed_item": "2021-10-30 21:29:29 +0800"
@@ -23,9 +74,9 @@
     },
     "done": true
   },
-  "minecraft:recipes/food/cake": {
+  "minecraft:recipes/decorations/chest": {
     "criteria": {
-      "has_egg": "2021-10-30 21:32:22 +0800"
+      "has_lots_of_items": "2021-11-01 06:21:30 +0800"
     },
     "done": true
   },
@@ -59,21 +110,15 @@
     },
     "done": true
   },
-  "minecraft:recipes/food/cooked_salmon_from_smoking": {
-    "criteria": {
-      "has_salmon": "2021-10-30 21:37:05 +0800"
-    },
-    "done": true
-  },
   "minecraft:adventure/root": {
     "criteria": {
       "killed_something": "2021-10-30 21:39:17 +0800"
     },
     "done": true
   },
-  "minecraft:recipes/food/cooked_chicken_from_campfire_cooking": {
+  "minecraft:recipes/building_blocks/spruce_wood": {
     "criteria": {
-      "has_chicken": "2021-10-30 21:39:17 +0800"
+      "has_log": "2021-11-01 06:29:49 +0800"
     },
     "done": true
   },
@@ -101,14 +146,11 @@
     },
     "done": true
   },
-  "minecraft:adventure/adventuring_time": {
+  "minecraft:nether/netherite_armor": {
     "criteria": {
-      "minecraft:forest": "2021-10-30 21:32:12 +0800",
-      "minecraft:taiga": "2021-10-30 19:37:35 +0800",
-      "minecraft:river": "2021-10-30 21:31:11 +0800",
-      "minecraft:plains": "2021-10-30 18:20:08 +0800"
+      "netherite_armor": "2021-11-01 06:21:27 +0800"
     },
-    "done": false
+    "done": true
   },
   "DataVersion": 2730
 }

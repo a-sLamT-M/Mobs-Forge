@@ -8,7 +8,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.lt.conquer.Conquer;
-import org.lt.conquer.items.hpPlus;
 import org.lt.conquer.registy.ModItems;
 
 public class ItemsManager implements IRegistry
@@ -29,6 +28,7 @@ public class ItemsManager implements IRegistry
     }
     private ItemsManager(){}
 
+    // tab
     public static final CreativeModeTab CONQUER_ITEM_GROUP = new CreativeModeTab("counquerItemsGroup")
     {
         @Override
@@ -37,14 +37,15 @@ public class ItemsManager implements IRegistry
             return new ItemStack(Items.CROSSBOW);
         }
     };
-
+    // items
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Conquer.MOD_ID);
     // public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("hp_plus", hpPlus::new);
 
+    @Override
     public void register(IEventBus eventBus)
     {
-        ModItems.registerForAll();
+        ModItems.itemsInit();
         ITEMS.register(eventBus);
     }
 }

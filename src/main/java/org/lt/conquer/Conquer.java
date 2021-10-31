@@ -16,6 +16,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lt.conquer.registy.ModItems;
+import org.lt.conquer.registy.register.EntitiesManager;
 import org.lt.conquer.registy.register.ItemsManager;
 
 import java.util.stream.Collectors;
@@ -31,7 +32,10 @@ public class Conquer
     {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
+
+        EntitiesManager.getInstance().register(eventBus);
         ItemsManager.getInstance().register(eventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 

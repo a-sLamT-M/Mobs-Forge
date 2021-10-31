@@ -3,5 +3,6 @@
   "item.lconquer.cube_spawn_egg": "猎人刷怪蛋",
   "item.lconquer.hp_plus.tooltip": "四颗心和牛排的热量",
   "block.lconquer.conquer_default_block": "路点",
-  "itemGroup.lconquer.counquerItemsGroup": "侵略"
+  "itemGroup.lconquer.counquerItemsGroup": "侵略",
+  "entity.lconquer.hunter": "猎人"
 }
