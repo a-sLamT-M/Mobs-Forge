@@ -1,8 +1,6 @@
 package org.lt.conquer.entities;
 
-import com.google.common.collect.Maps;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -23,30 +21,25 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.lt.conquer.entities.ai.BreakBlockGoal;
 import org.lt.conquer.registy.ModEntities;
-import org.lt.conquer.utils.Random;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.EnumSet;
-import java.util.Map;
 import java.util.function.Predicate;
 
 public class HunterEntity extends AbstractIllager
 {
     private static final String TAG_JOHNNY = "Johnny";
-    static final Predicate<Difficulty> DOOR_BREAKING_PREDICATE = (p_34082_) ->
+    static final Predicate<Difficulty> BREAKING_PREDICATE = (difficulty) ->
     {
-        return p_34082_ == Difficulty.NORMAL || p_34082_ == Difficulty.HARD;
+        return difficulty == Difficulty.EASY || difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD ;
     };
     boolean isJohnny;
 
@@ -59,8 +52,9 @@ public class HunterEntity extends AbstractIllager
     {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new HunterEntity.HunterBreakDoorGoal(this));
-        this.goalSelector.addGoal(2, new AbstractIllager.RaiderOpenDoorGoal(this));
+        // this.goalSelector.addGoal(1, new BreakBlockGoal(this, BREAKING_PREDICATE));
+        this.goalSelector.addGoal(1, new HunterBreakBlockGoal(this));
+        this.goalSelector.addGoal(2, new OpenDoorGoal(this, false));
         this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
         this.goalSelector.addGoal(4, new HunterMeleeAttackGoal(this));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
@@ -88,7 +82,7 @@ public class HunterEntity extends AbstractIllager
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, (double)0.377F)
                 .add(Attributes.FOLLOW_RANGE, 43.0D)
-                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.ATTACK_KNOCKBACK)
                 .add(Attributes.ATTACK_DAMAGE, 4D);
     }
@@ -129,7 +123,6 @@ public class HunterEntity extends AbstractIllager
         {
             this.isJohnny = pCompound.getBoolean("Johnny");
         }
-
     }
 
     public SoundEvent getCelebrateSound()
@@ -180,14 +173,6 @@ public class HunterEntity extends AbstractIllager
         }
     }
 
-    public void setCustomName(@Nullable Component pName) 
-    {
-        super.setCustomName(pName);
-        if (!this.isJohnny && pName != null && pName.getString().equals("Johnny")) {
-            this.isJohnny = true;
-        }
-    }
-
     protected SoundEvent getAmbientSound() {
         return SoundEvents.VINDICATOR_AMBIENT;
     }
@@ -200,62 +185,21 @@ public class HunterEntity extends AbstractIllager
         return SoundEvents.VINDICATOR_HURT;
     }
 
-    public void applyRaidBuffs(int p_34079_, boolean p_34080_) 
+    public void applyRaidBuffs(int p_34079_, boolean p_34080_)
     {
-        ItemStack itemstack = new ItemStack(Items.IRON_AXE);
-        Raid raid = this.getCurrentRaid();
-        int i = 1;
-        assert raid != null;
-        if (p_34079_ > raid.getNumGroups(Difficulty.NORMAL)) 
-        {
-            i = 2;
-        }
-
-        boolean flag = this.random.nextFloat() <= raid.getEnchantOdds();
-        if (flag) 
-        {
-            Map<Enchantment, Integer> map = Maps.newHashMap();
-            map.put(Enchantments.SHARPNESS, i);
-            EnchantmentHelper.setEnchantments(map, itemstack);
-        }
-
-        this.setItemSlot(EquipmentSlot.MAINHAND, itemstack);
+        // DO NOT RAID
     }
 
-    static class HunterBreakDoorGoal extends BreakDoorGoal
+    static class HunterBreakBlockGoal extends BreakBlockGoal
     {
-        public HunterBreakDoorGoal(Mob mob)
+        public HunterBreakBlockGoal(Mob mob)
         {
-            super(mob, 6, HunterEntity.DOOR_BREAKING_PREDICATE);
+            super(mob, false,false);
             this.setFlags(EnumSet.of(Goal.Flag.MOVE));
         }
-
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
-        public boolean canContinueToUse()
-        {
-            HunterEntity hunterEntity = (HunterEntity)this.mob;
-            return hunterEntity.hasActiveRaid() && super.canContinueToUse();
-        }
-
-        /**
-         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
-         * method as well.
-         */
         public boolean canUse()
         {
-            HunterEntity h = (HunterEntity) this.mob;
-            return h.hasActiveRaid() && Random.random(0, 10) == 0 && super.canUse();
-        }
-
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
-        public void start() 
-        {
-            super.start();
-            this.mob.setNoActionTime(0);
+            return true;
         }
     }
 
@@ -270,7 +214,8 @@ public class HunterEntity extends AbstractIllager
          * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
          * method as well.
          */
-        public boolean canUse() {
+        public boolean canUse()
+        {
             return ((HunterEntity)this.mob).isJohnny && super.canUse();
         }
 

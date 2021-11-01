@@ -40,7 +40,6 @@ public class ItemsManager implements IRegistry
     // items
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Conquer.MOD_ID);
-    // public static final RegistryObject<Item> TITANIUM_INGOT = ITEMS.register("hp_plus", hpPlus::new);
 
     @Override
     public void register(IEventBus eventBus)

@@ -1,7 +1,7 @@
 {
   "item.lconquer.hp_plus": "Heart",
-  "item.lconquer.cube_spawn_egg": "Hunter Egg",
   "item.lconquer.hp_plus.tooltip": "4 h 16 h",
+  "item.lconquer.hunter_spawn_egg": "Spawn Hunter",
   "block.lconquer.conquer_default_block": "node",
   "itemGroup.lconquer.counquerItemsGroup": "Conquer",
   "entity.lconquer.hunter": "Hunter"
