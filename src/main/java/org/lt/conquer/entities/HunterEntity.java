@@ -1,6 +1,7 @@
 package org.lt.conquer.entities;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.ai.util.GoalUtils;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.AbstractIllager;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.PatrollingMonster;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
@@ -26,8 +28,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.lt.conquer.Conquer;
 import org.lt.conquer.entities.ai.BreakBlockGoal;
 import org.lt.conquer.registy.ModEntities;
+import org.lt.conquer.utils.RandomNum;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -36,10 +40,12 @@ import java.util.function.Predicate;
 
 public class HunterEntity extends AbstractIllager
 {
+    private static final ResourceLocation LOOT_TABLE = new ResourceLocation(Conquer.MOD_ID, "entities/hunter_entity");
+
     private static final String TAG_JOHNNY = "Johnny";
     static final Predicate<Difficulty> BREAKING_PREDICATE = (difficulty) ->
     {
-        return difficulty == Difficulty.EASY || difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD ;
+        return difficulty == Difficulty.EASY || difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD;
     };
     boolean isJohnny;
 
@@ -48,31 +54,36 @@ public class HunterEntity extends AbstractIllager
         super(entityType, level);
     }
 
-    protected void registerGoals() 
+    protected void registerGoals()
     {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         // this.goalSelector.addGoal(1, new BreakBlockGoal(this, BREAKING_PREDICATE));
-        this.goalSelector.addGoal(1, new HunterBreakBlockGoal(this));
-        this.goalSelector.addGoal(2, new OpenDoorGoal(this, false));
+        this.goalSelector.addGoal(1, new BreakBlockGoal(this, false, false));
+        this.goalSelector.addGoal(2, new HunterOpenDoorGoal(this));
         this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
-        this.goalSelector.addGoal(4, new HunterMeleeAttackGoal(this));
+        this.goalSelector.addGoal(4, new HunterOpenDoorGoal.HunterMeleeAttackGoal(this));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(4, new HunterAttackGoal(this));
+        this.targetSelector.addGoal(4, new HunterOpenDoorGoal.HunterAttackGoal(this));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+    }
+
+    @Override
+    public void applyRaidBuffs(int p_37844_, boolean p_37845_)
+    {
     }
 
     protected void customServerAiStep()
     {
         if (!this.isNoAi() && GoalUtils.hasGroundPathNavigation(this))
         {
-            boolean flag = ((ServerLevel)this.level).isRaided(this.blockPosition());
-            ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(flag);
+            boolean flag = ((ServerLevel) this.level).isRaided(this.blockPosition());
+            ((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(flag);
         }
         super.customServerAiStep();
     }
@@ -80,22 +91,25 @@ public class HunterEntity extends AbstractIllager
     public static AttributeSupplier.Builder createAttributes()
     {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MOVEMENT_SPEED, (double)0.377F)
-                .add(Attributes.FOLLOW_RANGE, 43.0D)
-                .add(Attributes.MAX_HEALTH, 20.0D)
-                .add(Attributes.ATTACK_KNOCKBACK)
-                .add(Attributes.ATTACK_DAMAGE, 4D);
+                .add(Attributes.MOVEMENT_SPEED, (double) 0.382F)
+                .add(Attributes.FOLLOW_RANGE, 48.0D)
+                .add(Attributes.MAX_HEALTH, 42.0D)
+                .add(Attributes.ATTACK_SPEED, 0.9F)
+                .add(Attributes.KNOCKBACK_RESISTANCE, RandomNum.random(0F, 0.8F))
+                .add(Attributes.ATTACK_DAMAGE, 3.8D);
     }
 
-    public Monster getBreedOffSpring(ServerLevel level, Monster parent)
+
+    @Override
+    protected ResourceLocation getDefaultLootTable()
     {
-        return ModEntities.HUNTER.get().create(level);
+        return LOOT_TABLE;
     }
 
-    public void addAdditionalSaveData(CompoundTag pCompound) 
+    public void addAdditionalSaveData(CompoundTag pCompound)
     {
         super.addAdditionalSaveData(pCompound);
-        if (this.isJohnny) 
+        if (this.isJohnny)
         {
             pCompound.putBoolean("Johnny", true);
         }
@@ -113,9 +127,6 @@ public class HunterEntity extends AbstractIllager
         }
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readAdditionalSaveData(CompoundTag pCompound)
     {
         super.readAdditionalSaveData(pCompound);
@@ -135,119 +146,90 @@ public class HunterEntity extends AbstractIllager
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag)
     {
         SpawnGroupData spawngroupdata = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-        ((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
+        ((GroundPathNavigation) this.getNavigation()).setCanOpenDoors(true);
         this.populateDefaultEquipmentSlots(pDifficulty);
         this.populateDefaultEquipmentEnchantments(pDifficulty);
         return spawngroupdata;
     }
 
-    /**
-     * Gives armor or weapon for entity based on given DifficultyInstance
-     */
-    protected void populateDefaultEquipmentSlots(DifficultyInstance pDifficulty)
-    {
-        if (this.getCurrentRaid() == null)
-        {
-            this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_AXE));
-        }
-
-    }
-
-    /**
-     * Returns whether this Entity is on the same team as the given Entity.
-     */
     @ParametersAreNonnullByDefault
-    public boolean isAlliedTo(Entity pEntity) 
+    public boolean isAlliedTo(Entity pEntity)
     {
-        if (super.isAlliedTo(pEntity)) 
+        if (super.isAlliedTo(pEntity))
         {
             return true;
-        } 
-        else if (pEntity instanceof LivingEntity && ((LivingEntity)pEntity).getMobType() == MobType.ILLAGER) 
+        }
+        else if (pEntity instanceof LivingEntity && ((LivingEntity) pEntity).getMobType() == MobType.ILLAGER)
         {
             return this.getTeam() == null && pEntity.getTeam() == null;
-        } 
-        else 
+        }
+        else
         {
             return false;
         }
     }
 
-    protected SoundEvent getAmbientSound() {
+    protected SoundEvent getAmbientSound()
+    {
         return SoundEvents.VINDICATOR_AMBIENT;
     }
 
-    protected SoundEvent getDeathSound() {
+    protected SoundEvent getDeathSound()
+    {
         return SoundEvents.VINDICATOR_DEATH;
     }
 
-    protected SoundEvent getHurtSound(DamageSource pDamageSource) {
+    protected SoundEvent getHurtSound(DamageSource pDamageSource)
+    {
         return SoundEvents.VINDICATOR_HURT;
     }
 
-    public void applyRaidBuffs(int p_34079_, boolean p_34080_)
+    protected static class HunterOpenDoorGoal extends OpenDoorGoal
     {
-        // DO NOT RAID
-    }
-
-    static class HunterBreakBlockGoal extends BreakBlockGoal
-    {
-        public HunterBreakBlockGoal(Mob mob)
+        public HunterOpenDoorGoal(Raider p_32128_)
         {
-            super(mob, false,false);
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
-        }
-        public boolean canUse()
-        {
-            return true;
-        }
-    }
-
-    static class HunterAttackGoal extends NearestAttackableTargetGoal<LivingEntity>
-    {
-        public HunterAttackGoal(HunterEntity h)
-        {
-            super(h, LivingEntity.class, 0, false, true, LivingEntity::attackable);
+            super(p_32128_, false);
         }
 
-        /**
-         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
-         * method as well.
-         */
-        public boolean canUse()
+        static class HunterAttackGoal extends NearestAttackableTargetGoal<LivingEntity>
         {
-            return ((HunterEntity)this.mob).isJohnny && super.canUse();
-        }
-
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
-        public void start()
-        {
-            super.start();
-            this.mob.setNoActionTime(0);
-        }
-    }
-
-    static class HunterMeleeAttackGoal extends MeleeAttackGoal
-    {
-
-        public HunterMeleeAttackGoal(HunterEntity hunterEntity)
-        {
-            super(hunterEntity, 1.0D, false);
-        }
-
-        @ParametersAreNonnullByDefault
-        protected double getAttackReachSqr(LivingEntity playerAttackTarget)
-        {
-            if (this.mob.getVehicle() instanceof Ravager)
+            public HunterAttackGoal(HunterEntity h)
             {
-                float f = this.mob.getVehicle().getBbWidth() - 0.1F;
-                return (double)(f * 2.0F * f * 2.0F + playerAttackTarget.getBbWidth());
+                super(h, LivingEntity.class, 0, false, true, LivingEntity::attackable);
             }
-            else
+
+            public boolean canUse()
             {
-                return super.getAttackReachSqr(playerAttackTarget);
+                return ((HunterEntity) this.mob).isJohnny && super.canUse();
+            }
+
+            public void start()
+            {
+                super.start();
+                this.mob.setNoActionTime(0);
+            }
+        }
+
+        static class HunterMeleeAttackGoal extends MeleeAttackGoal
+        {
+
+            public HunterMeleeAttackGoal(HunterEntity hunterEntity)
+            {
+                super(hunterEntity, 1.0D, false);
+            }
+
+            @ParametersAreNonnullByDefault
+            protected double getAttackReachSqr(LivingEntity playerAttackTarget)
+            {
+                if (this.mob.getVehicle() instanceof Ravager)
+                {
+                    float f = this.mob.getVehicle().getBbWidth() - 0.1F;
+                    return (double) (f * 2.0F * f * 2.0F + playerAttackTarget.getBbWidth());
+                }
+                else
+                {
+                    return super.getAttackReachSqr(playerAttackTarget);
+                }
             }
         }
     }

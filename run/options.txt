@@ -26,7 +26,7 @@ fovEffectScale:1.0
 gamma:1.0
 renderDistance:12
 entityDistanceScaling:1.0
-guiScale:0
+guiScale:2
 particles:0
 maxFps:120
 difficulty:2
@@ -37,7 +37,7 @@ renderClouds:true
 resourcePacks:[]
 incompatibleResourcePacks:[]
 lastServer:
-lang:en_us
+lang:zh_cn
 chatVisibility:0
 chatOpacity:1.0
 chatLineSpacing:0.0

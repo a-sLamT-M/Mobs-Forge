@@ -23,10 +23,10 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
-public class BreakBlockGoal extends Goal
+public class BreakBlockGoal extends BlockInteractGoal
 {
     private final Mob mob;
-    private Entity targetPlayer;
+    private Entity targetEntity;
     private final double reachDistance;
     private final List<BlockPos> targetBlocks = new ArrayList<>();
     private int tickToBreak = 0;
@@ -40,6 +40,7 @@ public class BreakBlockGoal extends Goal
 
     public BreakBlockGoal(Mob m, boolean toolOnly, boolean properToolOnly)
     {
+        super(m);
         this.mob = m;
         this.reachDistance = 4;
         this.toolOnly = toolOnly;
@@ -71,8 +72,8 @@ public class BreakBlockGoal extends Goal
         if (this.properToolOnly && this.blockState != null && !this.canHarvestBlock())
             return false;
         return !this.targetBlocks.isEmpty()
-                && this.targetPlayer != null
-                && this.targetPlayer.isAlive()
+                && this.targetEntity != null
+                && this.targetEntity.isAlive()
                 && this.targetBlocks.get(0).distSqr(this.mob.blockPosition()) < this.reachDistance * this.reachDistance
                 && this.mob.getNavigation().isDone()
                 && !this.mob.level.getBlockState(this.targetBlocks.get(0)).isAir();
@@ -80,8 +81,8 @@ public class BreakBlockGoal extends Goal
 
     public void start()
     {
-        this.targetPlayer = this.mob.getTarget();
-        if (targetPlayer == null)
+        this.targetEntity = this.mob.getTarget();
+        if (targetEntity == null)
             return;
         fillTargetBlocks();
         if (!this.targetBlocks.isEmpty())
@@ -90,7 +91,7 @@ public class BreakBlockGoal extends Goal
 
     public void stop()
     {
-        this.targetPlayer = null;
+        this.targetEntity = null;
         if (!this.targetBlocks.isEmpty())
         {
             this.mob.level.destroyBlockProgress(this.mob.getId(), targetBlocks.get(0), -1);
@@ -215,7 +216,7 @@ public class BreakBlockGoal extends Goal
     {
         int mobHeight = Mth.ceil(this.mob.getBbHeight());
         for (int i = 0; i < mobHeight; i++) {
-            BlockHitResult rayTraceResult = this.mob.level.clip(new ClipContext(this.mob.position().add(0, i, 0), this.targetPlayer.getEyePosition(1f).add(0, i, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this.mob));
+            BlockHitResult rayTraceResult = this.mob.level.clip(new ClipContext(this.mob.position().add(0, i, 0), this.targetEntity.getEyePosition(1f).add(0, i, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this.mob));
             if (rayTraceResult.getType() == BlockHitResult.Type.MISS)
                 continue;
             if (this.targetBlocks.contains(rayTraceResult.getBlockPos()))

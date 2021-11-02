@@ -16,7 +16,7 @@ public class ModEntities
         // hunter
          HUNTER = EntitiesManager.ENTITY_TYPES.register("hunter",
                  () -> EntityType.Builder
-                         .of(HunterEntity::new, MobCategory.CREATURE)
+                         .of(HunterEntity::new, MobCategory.MONSTER)
                          .sized(1f,2f)
                          .build(new ResourceLocation(Conquer.MOD_ID, "hunter").toString()));
     }

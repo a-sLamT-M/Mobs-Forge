@@ -1,0 +1,21 @@
+{
+  "minecraft:husbandry/root": {
+    "criteria": {
+      "consumed_item": "2021-11-02 09:39:47 +0800"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:mountains": "2021-11-02 09:30:30 +0800",
+      "minecraft:forest": "2021-11-02 09:39:16 +0800",
+      "minecraft:birch_forest": "2021-11-02 09:30:21 +0800",
+      "minecraft:river": "2021-11-02 09:37:17 +0800",
+      "minecraft:birch_forest_hills": "2021-11-02 09:30:18 +0800",
+      "minecraft:wooded_mountains": "2021-11-02 09:30:35 +0800",
+      "minecraft:plains": "2021-11-02 09:30:11 +0800"
+    },
+    "done": false
+  },
+  "DataVersion": 2730
+}
