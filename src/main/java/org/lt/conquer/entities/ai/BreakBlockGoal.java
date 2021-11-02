@@ -215,7 +215,8 @@ public class BreakBlockGoal extends BlockInteractGoal
     private void fillTargetBlocks()
     {
         int mobHeight = Mth.ceil(this.mob.getBbHeight());
-        for (int i = 0; i < mobHeight; i++) {
+        for (int i = 0; i < mobHeight; i++)
+        {
             BlockHitResult rayTraceResult = this.mob.level.clip(new ClipContext(this.mob.position().add(0, i, 0), this.targetEntity.getEyePosition(1f).add(0, i, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this.mob));
             if (rayTraceResult.getType() == BlockHitResult.Type.MISS)
                 continue;

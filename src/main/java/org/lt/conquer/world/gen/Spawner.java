@@ -24,8 +24,8 @@ public class Spawner
     {
         List<MobSpawnSettings.SpawnerData> monster = event.getSpawns().getSpawner(MobCategory.MONSTER);
         List<MobSpawnSettings.SpawnerData> creature = event.getSpawns().getSpawner(MobCategory.CREATURE);
-        monster.add(new MobSpawnSettings.SpawnerData(ModEntities.HUNTER.get(), 5, 1,4));
-        creature.add(new MobSpawnSettings.SpawnerData(ModEntities.HUNTER.get(), 50, 1,4));
+        monster.add(new MobSpawnSettings.SpawnerData(ModEntities.HUNTER.get(), 8, 1,4));
+        creature.add(new MobSpawnSettings.SpawnerData(ModEntities.HUNTER.get(), 80, 1,4));
 
     }
 
