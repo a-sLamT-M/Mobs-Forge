@@ -1,4 +1,4 @@
-# ConquerForge
+# Conquer
 A Minecraft mod of AI MANHUNT.
 Lastest Version: 0.0.1
 
