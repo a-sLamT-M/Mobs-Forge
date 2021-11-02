@@ -125,6 +125,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/tools/flint_and_steel": {
+    "criteria": {
+      "has_obsidian": "2021-11-02 13:36:42 +0800"
+    },
+    "done": true
+  },
   "minecraft:recipes/tools/stone_shovel": {
     "criteria": {
       "has_cobblestone": "2021-11-01 21:31:22 +0800"
@@ -249,6 +255,12 @@
   "minecraft:recipes/redstone/oak_trapdoor": {
     "criteria": {
       "has_planks": "2021-11-01 21:25:34 +0800"
+    },
+    "done": true
+  },
+  "minecraft:story/form_obsidian": {
+    "criteria": {
+      "obsidian": "2021-11-02 13:36:42 +0800"
     },
     "done": true
   },
@@ -426,6 +438,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/decorations/enchanting_table": {
+    "criteria": {
+      "has_obsidian": "2021-11-02 13:36:42 +0800"
+    },
+    "done": true
+  },
   "minecraft:recipes/transportation/acacia_boat": {
     "criteria": {
       "in_water": "2021-11-01 06:43:43 +0800"
@@ -539,6 +557,7 @@
       "minecraft:pillager": "2021-11-01 07:25:22 +0800",
       "minecraft:spider": "2021-11-01 15:16:12 +0800",
       "minecraft:slime": "2021-11-01 08:16:30 +0800",
+      "minecraft:phantom": "2021-11-02 13:49:52 +0800",
       "minecraft:zombie": "2021-11-01 08:27:42 +0800"
     },
     "done": false

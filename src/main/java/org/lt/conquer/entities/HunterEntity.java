@@ -17,10 +17,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.util.GoalUtils;
 import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.PatrollingMonster;
-import net.minecraft.world.entity.monster.Ravager;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.raid.Raider;
@@ -42,11 +39,6 @@ public class HunterEntity extends AbstractIllager
 {
     private static final ResourceLocation LOOT_TABLE = new ResourceLocation(Conquer.MOD_ID, "entities/hunter_entity");
 
-    private static final String TAG_JOHNNY = "Johnny";
-    static final Predicate<Difficulty> BREAKING_PREDICATE = (difficulty) ->
-    {
-        return difficulty == Difficulty.EASY || difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD;
-    };
     boolean isJohnny;
 
     public HunterEntity(EntityType<? extends AbstractIllager> entityType, Level level)
@@ -59,15 +51,18 @@ public class HunterEntity extends AbstractIllager
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         // this.goalSelector.addGoal(1, new BreakBlockGoal(this, BREAKING_PREDICATE));
-        this.goalSelector.addGoal(1, new BreakBlockGoal(this, false, false));
+        this.goalSelector.addGoal(1, new BreakBlockGoal(this, false));
         this.goalSelector.addGoal(2, new HunterOpenDoorGoal(this));
         this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
         this.goalSelector.addGoal(4, new HunterOpenDoorGoal.HunterMeleeAttackGoal(this));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
         this.targetSelector.addGoal(4, new HunterOpenDoorGoal.HunterAttackGoal(this));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, true, false, (p_28879_) -> {
+            return p_28879_ instanceof Enemy ;
+        }));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
@@ -91,7 +86,7 @@ public class HunterEntity extends AbstractIllager
     public static AttributeSupplier.Builder createAttributes()
     {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MOVEMENT_SPEED, (double) 0.382F)
+                .add(Attributes.MOVEMENT_SPEED, 0.382F)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)
                 .add(Attributes.MAX_HEALTH, 42.0D)
                 .add(Attributes.ATTACK_SPEED, 0.9F)
@@ -224,7 +219,7 @@ public class HunterEntity extends AbstractIllager
                 if (this.mob.getVehicle() instanceof Ravager)
                 {
                     float f = this.mob.getVehicle().getBbWidth() - 0.1F;
-                    return (double) (f * 2.0F * f * 2.0F + playerAttackTarget.getBbWidth());
+                    return f * 2.0F * f * 2.0F + playerAttackTarget.getBbWidth();
                 }
                 else
                 {

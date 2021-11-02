@@ -22,12 +22,6 @@ import java.util.function.Supplier;
 
 public class HunterModel <Type extends HunterEntity> extends HumanoidModel<Type>
 {
-    private static final String EAR = "ear";
-    private static final String CLOAK = "cloak";
-    private static final String LEFT_SLEEVE = "left_sleeve";
-    private static final String RIGHT_SLEEVE = "right_sleeve";
-    private static final String LEFT_PANTS = "left_pants";
-    private static final String RIGHT_PANTS = "right_pants";
     private final List<ModelPart> parts;
     public final ModelPart leftSleeve;
     public final ModelPart rightSleeve;
@@ -92,20 +86,6 @@ public class HunterModel <Type extends HunterEntity> extends HumanoidModel<Type>
         return Iterables.concat(super.bodyParts(), ImmutableList.of(this.leftPants, this.rightPants, this.leftSleeve, this.rightSleeve, this.jacket));
     }
 
-    public void renderEars(PoseStack pMatrixStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay) {
-        this.ear.copyFrom(this.head);
-        this.ear.x = 0.0F;
-        this.ear.y = 0.0F;
-        this.ear.render(pMatrixStack, pBuffer, pPackedLight, pPackedOverlay);
-    }
-
-    public void renderCloak(PoseStack pMatrixStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay) {
-        this.cloak.render(pMatrixStack, pBuffer, pPackedLight, pPackedOverlay);
-    }
-
-    /**
-     * Sets this entity's model rotation angles
-     */
     public void setupAnim(Type pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         this.leftPants.copyFrom(this.leftLeg);
@@ -152,10 +132,5 @@ public class HunterModel <Type extends HunterEntity> extends HumanoidModel<Type>
         } else {
             modelpart.translateAndRotate(pMatrixStack);
         }
-
-    }
-
-    public ModelPart getRandomModelPart(Random pRandom) {
-        return this.parts.get(pRandom.nextInt(this.parts.size()));
     }
 }

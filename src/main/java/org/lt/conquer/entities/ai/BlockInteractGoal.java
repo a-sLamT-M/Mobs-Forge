@@ -11,7 +11,7 @@ import net.minecraft.world.level.pathfinder.Path;
 
 public abstract class BlockInteractGoal extends Goal
 {
-    protected Mob mob;
+    protected final Mob mob;
     protected BlockPos blockPos = BlockPos.ZERO;
     private boolean passed;
     private float blockDirX;
@@ -46,7 +46,7 @@ public abstract class BlockInteractGoal extends Goal
                 {
                     Node node = path.getNode(i);
                     this.blockPos = new BlockPos(node.x, node.y + 1, node.z);
-                    if (!(this.mob.distanceToSqr((double)this.blockPos.getX(), this.mob.getY(), (double)this.blockPos.getZ()) > 2.25D))
+                    if (!(this.mob.distanceToSqr(this.blockPos.getX(), this.mob.getY(), this.blockPos.getZ()) > 2.25D))
                     {
                         return true;
                     }

@@ -33,17 +33,15 @@ public class BreakBlockGoal extends BlockInteractGoal
     private int breakingTick = 0;
     private BlockState blockState = null;
     private int prevBreakProgress = 0;
-    private final boolean toolOnly;
     private final boolean properToolOnly;
 
     private int ticksWithNoPath = 0;
 
-    public BreakBlockGoal(Mob m, boolean toolOnly, boolean properToolOnly)
+    public BreakBlockGoal(Mob m, boolean properToolOnly)
     {
         super(m);
         this.mob = m;
         this.reachDistance = 4;
-        this.toolOnly = toolOnly;
         this.properToolOnly = properToolOnly;
         this.setFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
     }
@@ -209,7 +207,6 @@ public class BreakBlockGoal extends BlockInteractGoal
     private boolean canHarvestBlock()
     {
         return true;
-        // return blockState.canHarvestBlock(mob.level, targetBlocks.get(0), (Player) targetPlayer);
     }
 
     private void fillTargetBlocks()
@@ -230,9 +227,6 @@ public class BreakBlockGoal extends BlockInteractGoal
 
             if (state.hasBlockEntity())
                 continue;
-
-            boolean isInWhitelist = false;
-            boolean isInBlacklist = false;
 
             this.targetBlocks.add(rayTraceResult.getBlockPos());
         }

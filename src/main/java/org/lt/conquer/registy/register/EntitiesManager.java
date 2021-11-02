@@ -25,7 +25,7 @@ public class EntitiesManager implements IRegistry
     }
     private EntitiesManager(){}
 
-    public static DeferredRegister<EntityType<?>> ENTITY_TYPES =
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.ENTITIES, Conquer.MOD_ID);
 
     @Override
