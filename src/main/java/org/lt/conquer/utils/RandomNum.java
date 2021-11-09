@@ -17,6 +17,11 @@ public class RandomNum
         return float_lastRandom;
     }
 
+    public static boolean random(float chance)
+    {
+        return Math.random() < chance;
+    }
+
     public static int getLastIntRandom()
     {
         return int_lastRandom;

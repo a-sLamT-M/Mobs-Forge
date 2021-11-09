@@ -1,0 +1,150 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 2021/11/9 下午4:14
+Description: Ticking entity
+
+java.lang.NullPointerException: Cannot invoke "net.minecraft.network.syncher.SynchedEntityData$DataItem.getValue()" because the return value of "net.minecraft.network.syncher.SynchedEntityData.getItem(net.minecraft.network.syncher.EntityDataAccessor)" is null
+	at net.minecraft.network.syncher.SynchedEntityData.get(SynchedEntityData.java:137) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at org.lt.conquer.entities.HunterEntity.isClimbing(HunterEntity.java:79) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.HunterEntity.onClimbable(HunterEntity.java:74) ~[%2379!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.handleOnClimbable(LivingEntity.java:2306) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.handleRelativeFrictionAndCalculateMovement(LivingEntity.java:2280) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.travel(LivingEntity.java:2238) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.aiStep(LivingEntity.java:2683) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.Mob.aiStep(Mob.java:538) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.entity.monster.Monster.aiStep(Monster.java:44) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.raid.Raider.aiStep(Raider.java:107) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2388) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.Mob.tick(Mob.java:337) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at org.lt.conquer.entities.HunterEntity.tick(HunterEntity.java:104) ~[%2379!:?] {re:classloading}
+	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.Level.guardEntityTick(Level.java:525) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerLevel.lambda$tick$5(ServerLevel.java:387) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:54) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:368) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:916) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:852) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:91) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:705) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:259) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:831) [?:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.network.syncher.SynchedEntityData.get(SynchedEntityData.java:137) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at org.lt.conquer.entities.HunterEntity.isClimbing(HunterEntity.java:79) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.HunterEntity.onClimbable(HunterEntity.java:74) ~[%2379!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.handleOnClimbable(LivingEntity.java:2306) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.handleRelativeFrictionAndCalculateMovement(LivingEntity.java:2280) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.travel(LivingEntity.java:2238) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.aiStep(LivingEntity.java:2683) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.Mob.aiStep(Mob.java:538) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.entity.monster.Monster.aiStep(Monster.java:44) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.raid.Raider.aiStep(Raider.java:107) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2388) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.world.entity.Mob.tick(Mob.java:337) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at org.lt.conquer.entities.HunterEntity.tick(HunterEntity.java:104) ~[%2379!:?] {re:classloading}
+	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+-- Entity being ticked --
+Details:
+	Entity Type: lconquer:hunter (org.lt.conquer.entities.HunterEntity)
+	Entity ID: 23
+	Entity Name: 猎人
+	Entity's Exact location: -40.36, 4.00, 74.27
+	Entity's Block location: World: (-41,4,74), Section: (at 7,4,10 in -3,0,4; chunk contains blocks -48,0,64 to -33,255,79), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: null
+Stacktrace:
+	at net.minecraft.world.level.Level.guardEntityTick(Level.java:525) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.level.ServerLevel.lambda$tick$5(ServerLevel.java:387) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:54) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
+	at net.minecraft.server.level.ServerLevel.tick(ServerLevel.java:368) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+
+
+-- Affected level --
+Details:
+	All players: 0 total; []
+	Chunk stats: 2025
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (-32,4,16), Section: (at 0,4,0 in -2,0,1; chunk contains blocks -32,0,16 to -17,255,31), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 93395 game time, 17427 day time
+	Level name: New World
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+	Level weather: Rain time: 111800 (now: false), thunder time: 13005 (now: false)
+	Known server brands: forge
+	Level was modded: true
+	Level storage version: 0x04ABD - Anvil
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.tickChildren(MinecraftServer.java:916) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tickServer(MinecraftServer.java:852) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.client.server.IntegratedServer.tickServer(IntegratedServer.java:91) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:705) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:259) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
+	at java.lang.Thread.run(Thread.java:831) [?:?] {}
+
+
+-- System Details --
+Details:
+	Minecraft Version: 1.17.1
+	Minecraft Version ID: 1.17.1
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 16.0.2, Eclipse Foundation
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Foundation
+	Memory: 2122242712 bytes (2023 MiB) / 2814377984 bytes (2684 MiB) up to 4278190080 bytes (4080 MiB)
+	CPUs: 12
+	Processor Vendor: AuthenticAMD
+	Processor Name: AMD Ryzen 5 2600 Six-Core Processor            
+	Identifier: AuthenticAMD Family 23 Model 8 Stepping 2
+	Microarchitecture: Zen+
+	Frequency (GHz): 3.39
+	Number of physical packages: 1
+	Number of physical CPUs: 6
+	Number of logical CPUs: 12
+	Graphics card #0 name: NVIDIA Quadro 600
+	Graphics card #0 vendor: NVIDIA (0x10de)
+	Graphics card #0 VRAM (MB): 1024.00
+	Graphics card #0 deviceId: 0x0df8
+	Graphics card #0 versionInfo: DriverVersion=21.21.13.7711
+	Memory slot #0 capacity (MB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 2.67
+	Memory slot #0 type: DDR4
+	Virtual memory max (MB): 27067.06
+	Virtual memory used (MB): 19446.02
+	Swap memory total (MB): 10752.00
+	Swap memory used (MB): 779.81
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Player Count: 0 / 8; []
+	Data Packs: vanilla, mod:lconquer, mod:forge
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'
+	ModLauncher: 9.0.7+91+master.8569cdf
+	ModLauncher launch target: forgeclientuserdev
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		 mixin PLUGINSERVICE 
+		 eventbus PLUGINSERVICE 
+		 object_holder_definalize PLUGINSERVICE 
+		 runtime_enum_extender PLUGINSERVICE 
+		 capability_token_subclass PLUGINSERVICE 
+		 capability_inject_definalize PLUGINSERVICE 
+		 accesstransformer PLUGINSERVICE 
+		 runtimedistcleaner PLUGINSERVICE 
+		 mixin TRANSFORMATIONSERVICE 
+		 fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		javafml@null
+	Mod List: 
+		forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-|Minecraft                     |minecraft                     |1.17.1              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		main                                              |Conquer                       |lconquer                      |0.0NONE             |DONE      |Manifest: NOSIGNATURE
+		                                                  |Forge                         |forge                         |37.0.103            |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: 58a27a53-1f50-412a-8658-808f754599a8
+	FML: 37.0
+	Forge: net.minecraftforge:37.0.103
