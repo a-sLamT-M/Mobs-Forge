@@ -5,8 +5,8 @@ Time: 2021/11/9 下午4:10
 Description: Ticking entity
 
 java.lang.ClassCastException: class java.lang.Boolean cannot be cast to class java.lang.Byte (java.lang.Boolean and java.lang.Byte are in module java.base of loader 'bootstrap')
-	at org.lt.conquer.entities.HunterEntity.isClimbing(HunterEntity.java:76) ~[%2379!:?] {re:classloading}
-	at org.lt.conquer.entities.HunterEntity.onClimbable(HunterEntity.java:71) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.isClimbing(HunterEntity.java:76) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.onClimbable(HunterEntity.java:71) ~[%2379!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleOnClimbable(LivingEntity.java:2306) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleRelativeFrictionAndCalculateMovement(LivingEntity.java:2280) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.travel(LivingEntity.java:2238) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
@@ -16,7 +16,7 @@ java.lang.ClassCastException: class java.lang.Boolean cannot be cast to class ja
 	at net.minecraft.world.entity.raid.Raider.aiStep(Raider.java:107) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2388) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.Mob.tick(Mob.java:337) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
-	at org.lt.conquer.entities.HunterEntity.tick(HunterEntity.java:101) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.tick(HunterEntity.java:101) ~[%2379!:?] {re:classloading}
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.world.level.Level.guardEntityTick(Level.java:525) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.server.level.ServerLevel.lambda$tick$5(ServerLevel.java:387) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
@@ -36,8 +36,8 @@ A detailed walkthrough of the error, its code path and all known details is as f
 -- Head --
 Thread: Server thread
 Stacktrace:
-	at org.lt.conquer.entities.HunterEntity.isClimbing(HunterEntity.java:76) ~[%2379!:?] {re:classloading}
-	at org.lt.conquer.entities.HunterEntity.onClimbable(HunterEntity.java:71) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.isClimbing(HunterEntity.java:76) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.onClimbable(HunterEntity.java:71) ~[%2379!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleOnClimbable(LivingEntity.java:2306) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleRelativeFrictionAndCalculateMovement(LivingEntity.java:2280) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.travel(LivingEntity.java:2238) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
@@ -47,11 +47,11 @@ Stacktrace:
 	at net.minecraft.world.entity.raid.Raider.aiStep(Raider.java:107) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2388) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.Mob.tick(Mob.java:337) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
-	at org.lt.conquer.entities.HunterEntity.tick(HunterEntity.java:101) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.tick(HunterEntity.java:101) ~[%2379!:?] {re:classloading}
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 -- Entity being ticked --
 Details:
-	Entity Type: lconquer:hunter (org.lt.conquer.entities.HunterEntity)
+	Entity Type: lconquer:hunter (org.lt.conquer.entities.RedHunterEntity)
 	Entity ID: 74
 	Entity Name: 猎人
 	Entity's Exact location: -40.36, 4.00, 74.27

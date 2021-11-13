@@ -3,7 +3,6 @@ package org.lt.conquer.client.model;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,13 +13,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import org.lt.conquer.Conquer;
-import org.lt.conquer.entities.HunterEntity;
+import org.lt.conquer.entities.AbstractHunter;
 
 import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
 
-public class HunterModel <Type extends HunterEntity> extends HumanoidModel<Type>
+public class HunterModel <Type extends AbstractHunter> extends HumanoidModel<Type>
 {
     private final List<ModelPart> parts;
     public final ModelPart leftSleeve;

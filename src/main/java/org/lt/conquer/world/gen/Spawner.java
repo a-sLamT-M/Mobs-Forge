@@ -13,8 +13,12 @@ public class Spawner
     {
         List<MobSpawnSettings.SpawnerData> monster = event.getSpawns().getSpawner(MobCategory.MONSTER);
         List<MobSpawnSettings.SpawnerData> creature = event.getSpawns().getSpawner(MobCategory.CREATURE);
-        monster.add(new MobSpawnSettings.SpawnerData(ModEntities.HUNTER.get(), 12, 1,2));
-        creature.add(new MobSpawnSettings.SpawnerData(ModEntities.HUNTER.get(), 88, 1,4));
+
+        monster.add(new MobSpawnSettings.SpawnerData(ModEntities.RED_HUNTER.get(), 12, 1,2));
+        creature.add(new MobSpawnSettings.SpawnerData(ModEntities.RED_HUNTER.get(), 44, 1,4));
+
+        monster.add(new MobSpawnSettings.SpawnerData(ModEntities.BLUE_HUNTER.get(), 12, 1,2));
+        creature.add(new MobSpawnSettings.SpawnerData(ModEntities.BLUE_HUNTER.get(), 44, 1,4));
     }
 
     /*public static void onEntitySpawn(final BiomeLoadingEvent event) {

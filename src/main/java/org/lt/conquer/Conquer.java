@@ -20,8 +20,10 @@ public class Conquer
     {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
-        EntitiesManager.getInstance().register(eventBus);
+
         ItemsManager.getInstance().register(eventBus);
+        EntitiesManager.getInstance().register(eventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 

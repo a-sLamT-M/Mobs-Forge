@@ -6,7 +6,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lt.conquer.Conquer;
 import org.lt.conquer.client.model.HunterModel;
-import org.lt.conquer.client.renderer.HunterRender;
+import org.lt.conquer.client.renderer.BlueHunterRender;
+import org.lt.conquer.client.renderer.RedHunterRender;
 import org.lt.conquer.registy.ModEntities;
 
 @Mod.EventBusSubscriber(modid = Conquer.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -24,6 +25,7 @@ public class ClientModEvents
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
-        event.registerEntityRenderer(ModEntities.HUNTER.get(), HunterRender::new);
+        event.registerEntityRenderer(ModEntities.BLUE_HUNTER.get(), BlueHunterRender::new);
+        event.registerEntityRenderer(ModEntities.RED_HUNTER.get(), RedHunterRender::new);
     }
 }

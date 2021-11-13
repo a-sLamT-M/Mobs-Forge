@@ -1,8 +1,10 @@
 {
   "item.lconquer.hp_plus": "杀人诛心",
-  "item.lconquer.hunter_spawn_egg": "猎人刷怪蛋",
+  "item.lconquer.red_hunter_spawn_egg": "红衣猎人刷怪蛋",
+  "item.lconquer.blue_hunter_spawn_egg": "蓝衣猎人刷怪蛋",
   "item.lconquer.hp_plus.tooltip": "四颗心和牛排的热量",
   "block.lconquer.conquer_default_block": "路点",
   "itemGroup.lconquer.counquerItemsGroup": "侵略",
-  "entity.lconquer.hunter": "猎人"
+  "entity.lconquer.red_hunter": "红衣猎人",
+  "entity.lconquer.blue_hunter": "蓝衣猎人"
 }

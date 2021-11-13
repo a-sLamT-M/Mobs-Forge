@@ -13,60 +13,39 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.ai.util.GoalUtils;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.npc.AbstractVillager;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.monster.AbstractIllager;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import org.lt.conquer.Conquer;
-import org.lt.conquer.entities.ai.BreakBlockGoal;
 import org.lt.conquer.utils.RandomNum;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class HunterEntity extends AbstractIllager
+public abstract class AbstractHunter extends AbstractIllager
 {
-    private static final ResourceLocation LOOT_TABLE =
-            new ResourceLocation(Conquer.MOD_ID, "entities/hunter_entity");
     private static final EntityDataAccessor<Byte> DATA_FLAGS_ID =
-            SynchedEntityData.defineId(HunterEntity.class, EntityDataSerializers.BYTE);
+            SynchedEntityData.defineId(RedHunterEntity.class, EntityDataSerializers.BYTE);
 
     boolean isJohnny;
 
-    public HunterEntity(EntityType<? extends AbstractIllager> entityType, Level level)
+    protected AbstractHunter(EntityType<? extends AbstractIllager> p_32105_, Level p_32106_)
     {
-        super(entityType, level);
+        super(p_32105_, p_32106_);
     }
 
     protected void registerGoals()
     {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new BreakBlockGoal(this, false));
-        this.goalSelector.addGoal(2, new HunterOpenDoorGoal(this));
-        this.goalSelector.addGoal(3, new Raider.HoldGroundAttackGoal(this, 10.0F));
-        this.goalSelector.addGoal(4, new HunterOpenDoorGoal.HunterMeleeAttackGoal(this));
-        this.targetSelector.addGoal(1, (new HurtByTargetGoal(this, Raider.class)).setAlertOthers());
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(4, new HunterOpenDoorGoal.HunterAttackGoal(this));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, true, false, (p_28879_) -> {
-            return p_28879_ instanceof Enemy ;
-        }));
-        this.goalSelector.addGoal(8, new RandomStrollGoal(this, 0.6D));
-        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 3.0F, 1.0F));
-        this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
     }
 
     protected void defineSynchedData()
@@ -95,6 +74,7 @@ public class HunterEntity extends AbstractIllager
     {
         return new WallClimberNavigation(this, pLevel);
     }
+
     protected void customServerAiStep()
     {
         if (!this.isNoAi() && GoalUtils.hasGroundPathNavigation(this))
@@ -149,10 +129,7 @@ public class HunterEntity extends AbstractIllager
     }
 
     @Override
-    protected ResourceLocation getDefaultLootTable()
-    {
-        return LOOT_TABLE;
-    }
+    protected abstract ResourceLocation getDefaultLootTable();
 
     public void addAdditionalSaveData(CompoundTag pCompound)
     {
@@ -241,14 +218,14 @@ public class HunterEntity extends AbstractIllager
 
         static class HunterAttackGoal extends NearestAttackableTargetGoal<LivingEntity>
         {
-            public HunterAttackGoal(HunterEntity h)
+            public HunterAttackGoal(RedHunterEntity h)
             {
                 super(h, LivingEntity.class, 0, false, true, LivingEntity::attackable);
             }
 
             public boolean canUse()
             {
-                return ((HunterEntity) this.mob).isJohnny && super.canUse();
+                return ((RedHunterEntity) this.mob).isJohnny && super.canUse();
             }
 
             public void start()
@@ -259,9 +236,9 @@ public class HunterEntity extends AbstractIllager
         }
         static class HunterMeleeAttackGoal extends MeleeAttackGoal
         {
-            public HunterMeleeAttackGoal(HunterEntity hunterEntity)
+            public HunterMeleeAttackGoal(RedHunterEntity redHunterEntity)
             {
-                super(hunterEntity, 1.0D, false);
+                super(redHunterEntity, 1.0D, false);
             }
 
             @ParametersAreNonnullByDefault

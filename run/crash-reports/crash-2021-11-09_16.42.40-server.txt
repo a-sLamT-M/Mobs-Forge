@@ -6,8 +6,8 @@ Description: Ticking entity
 
 java.lang.NullPointerException: Cannot invoke "net.minecraft.network.syncher.SynchedEntityData$DataItem.getValue()" because the return value of "net.minecraft.network.syncher.SynchedEntityData.getItem(net.minecraft.network.syncher.EntityDataAccessor)" is null
 	at net.minecraft.network.syncher.SynchedEntityData.get(SynchedEntityData.java:137) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
-	at org.lt.conquer.entities.HunterEntity.isClimbing(HunterEntity.java:79) ~[%2379!:?] {re:classloading}
-	at org.lt.conquer.entities.HunterEntity.onClimbable(HunterEntity.java:74) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.isClimbing(HunterEntity.java:79) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.onClimbable(HunterEntity.java:74) ~[%2379!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleOnClimbable(LivingEntity.java:2306) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleRelativeFrictionAndCalculateMovement(LivingEntity.java:2280) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.travel(LivingEntity.java:2238) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
@@ -17,7 +17,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.network.syncher.Syn
 	at net.minecraft.world.entity.raid.Raider.aiStep(Raider.java:107) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2388) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.Mob.tick(Mob.java:337) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
-	at org.lt.conquer.entities.HunterEntity.tick(HunterEntity.java:104) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.tick(HunterEntity.java:104) ~[%2379!:?] {re:classloading}
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.world.level.Level.guardEntityTick(Level.java:525) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 	at net.minecraft.server.level.ServerLevel.lambda$tick$5(ServerLevel.java:387) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
@@ -38,8 +38,8 @@ A detailed walkthrough of the error, its code path and all known details is as f
 Thread: Server thread
 Stacktrace:
 	at net.minecraft.network.syncher.SynchedEntityData.get(SynchedEntityData.java:137) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
-	at org.lt.conquer.entities.HunterEntity.isClimbing(HunterEntity.java:79) ~[%2379!:?] {re:classloading}
-	at org.lt.conquer.entities.HunterEntity.onClimbable(HunterEntity.java:74) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.isClimbing(HunterEntity.java:79) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.onClimbable(HunterEntity.java:74) ~[%2379!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleOnClimbable(LivingEntity.java:2306) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.handleRelativeFrictionAndCalculateMovement(LivingEntity.java:2280) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.travel(LivingEntity.java:2238) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
@@ -49,11 +49,11 @@ Stacktrace:
 	at net.minecraft.world.entity.raid.Raider.aiStep(Raider.java:107) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2388) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading}
 	at net.minecraft.world.entity.Mob.tick(Mob.java:337) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
-	at org.lt.conquer.entities.HunterEntity.tick(HunterEntity.java:104) ~[%2379!:?] {re:classloading}
+	at org.lt.conquer.entities.RedHunterEntity.tick(HunterEntity.java:104) ~[%2379!:?] {re:classloading}
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 -- Entity being ticked --
 Details:
-	Entity Type: lconquer:hunter (org.lt.conquer.entities.HunterEntity)
+	Entity Type: lconquer:hunter (org.lt.conquer.entities.RedHunterEntity)
 	Entity ID: 617
 	Entity Name: 猎人
 	Entity's Exact location: -206.50, 4.00, -58.50

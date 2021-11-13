@@ -13,7 +13,7 @@ public class HpPlus extends Item
             .stacksTo(64)
             .tab(ItemsManager.CONQUER_ITEM_GROUP)
             .food(new FoodProperties.Builder()
-                    .nutrition(5)
+                    .nutrition(9)
                     .saturationMod(0.5f)
                     .alwaysEat()
                     .fast()

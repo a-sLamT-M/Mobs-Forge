@@ -73,7 +73,7 @@ Stacktrace:
 	at net.minecraft.server.level.ServerLevel.tickNonPassenger(ServerLevel.java:635) ~[forge-1.17.1-37.0.103_mapped_parchment_2021.10.24-1.17.1-recomp.jar%2375!:?] {re:classloading,pl:accesstransformer:B}
 -- Entity being ticked --
 Details:
-	Entity Type: lconquer:hunter (org.lt.conquer.entities.HunterEntity)
+	Entity Type: lconquer:hunter (org.lt.conquer.entities.RedHunterEntity)
 	Entity ID: 181
 	Entity Name: Hunter
 	Entity's Exact location: -1655.50, 4.00, 81.50
