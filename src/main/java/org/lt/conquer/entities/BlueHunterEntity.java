@@ -149,7 +149,7 @@ public class BlueHunterEntity extends AbstractHunter implements Hunter
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.3823F)
                 .add(Attributes.FOLLOW_RANGE, 50.0D)
-                .add(Attributes.MAX_HEALTH, 52.0D)
+                .add(Attributes.MAX_HEALTH, 65.0D)
                 .add(Attributes.ATTACK_SPEED, 0.9F)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0f)
                 .add(Attributes.ATTACK_DAMAGE, attackDamage);

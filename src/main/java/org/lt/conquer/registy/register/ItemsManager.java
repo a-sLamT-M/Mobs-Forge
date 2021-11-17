@@ -22,6 +22,7 @@ public class ItemsManager implements IRegistry
         }
 
     }
+
     public static ItemsManager getInstance()
     {
         return Singleton.INSTANCE.instance;
@@ -37,6 +38,7 @@ public class ItemsManager implements IRegistry
             return new ItemStack(Items.CROSSBOW);
         }
     };
+
     // items
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Conquer.MOD_ID);

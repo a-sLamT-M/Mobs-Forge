@@ -51,7 +51,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:stone_pickaxe",
+          "name": "minecraft:iron_sword",
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.5
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_pickaxe",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -61,9 +71,25 @@
           "conditions": [
             {
               "condition": "minecraft:random_chance",
+              "chance": 0.2
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_axe",
+          "conditions": [
+            {
+              "condition": "minecraft:random_chance",
               "chance": 1
             }
           ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.3
         }
       ]
     },
@@ -114,7 +140,7 @@
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 0.5
+          "chance": 0.3
         }
       ]
     },
@@ -142,13 +168,13 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 10,
+                "min": 0,
                 "max": 128
               },
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
-                  "chance": 0.9
+                  "chance": 1
                 }
               ]
             }
@@ -169,7 +195,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:acacia_log",
+          "name": "minecraft:oak_log",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -198,7 +224,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 0,
-                "max": 10
+                "max": 25
               }
             }
           ]
@@ -207,7 +233,7 @@
       "conditions": [
         {
           "condition": "minecraft:random_chance",
-          "chance": 1
+          "chance": 0.8
         }
       ]
     },
@@ -217,17 +243,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:diamond_chestplate",
+          "name": "minecraft:iron_ingot",
           "conditions": [
             {
               "condition": "minecraft:random_chance",
               "chance": 0.5
             }
           ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:iron_ingot"
         },
         {
           "type": "minecraft:item",
@@ -251,6 +273,10 @@
         }
       ],
       "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        },
         {
           "condition": "minecraft:killed_by_player"
         },

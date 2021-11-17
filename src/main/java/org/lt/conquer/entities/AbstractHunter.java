@@ -26,6 +26,7 @@ import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.raid.Raider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.lt.conquer.registy.ModEntities;
 import org.lt.conquer.utils.RandomNum;
 
 import javax.annotation.Nullable;

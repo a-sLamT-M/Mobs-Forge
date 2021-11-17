@@ -167,8 +167,7 @@ public class BreakBlockGoal extends BlockInteractGoal
 
         if (MobEffectUtil.hasDigSpeed(this.mob))
         {
-            digSpeed *=
-                    1.0F + (float)(MobEffectUtil.getDigSpeedAmplification(this.mob) + 1) * 0.2F;
+            digSpeed *= 1.0F + (float)(MobEffectUtil.getDigSpeedAmplification(this.mob) + 1) * 0.2F;
         }
 
         if (this.mob.hasEffect(MobEffects.DIG_SLOWDOWN))
